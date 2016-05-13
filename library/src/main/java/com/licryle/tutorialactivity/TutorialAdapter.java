@@ -6,7 +6,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class TutorialAdapter extends FragmentPagerAdapter {
+class TutorialAdapter extends FragmentPagerAdapter {
   protected ArrayList<TutorialFragment> _mFragments = new ArrayList<>();
 
   public TutorialAdapter(FragmentManager fm) {

@@ -8,22 +8,18 @@ import android.view.ViewGroup;
 
 import com.licryle.IntroActivity.R;
 
-/**
- * Source: https://medium.com/android-news/creating-an-intro-screen-for-your-app
- * -using-viewpager-pagetransformer-9950517ea04f#.cedk02txr
- */
 public class TutorialFragment extends Fragment {
   protected static final String BACKGROUND_COLOR = "backgroundColor";
   protected int _mBackgroundColor;
 
   public static TutorialFragment newInstance(int iBackgroundColor) {
-    TutorialFragment frag = new TutorialFragment();
+    TutorialFragment mFragment = new TutorialFragment();
 
-    Bundle b = new Bundle();
-    b.putInt(BACKGROUND_COLOR, iBackgroundColor);
-    frag.setArguments(b);
+    Bundle mBundle = new Bundle();
+    mBundle.putInt(BACKGROUND_COLOR, iBackgroundColor);
+    mFragment.setArguments(mBundle);
 
-    return frag;
+    return mFragment;
   }
 
   @Override
@@ -36,9 +32,10 @@ public class TutorialFragment extends Fragment {
   }
 
   public int getBackgroundColor() { return _mBackgroundColor; }
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    int layoutResId = R.layout.tutorial_fragment_layout_example;
+    int layoutResId = _getLayoutResourceId();
 
     // Inflate the layout resource file
     View view = getActivity().getLayoutInflater().inflate(layoutResId, container, false);
@@ -53,5 +50,9 @@ public class TutorialFragment extends Fragment {
 
   public void transformAsPage(float dPosition, int iPage, int iNbPages,
                               TutorialFragment mOtherPage) {
+  }
+
+  protected int _getLayoutResourceId() {
+    return R.layout.tutorial_fragment_layout_example;
   }
 }
