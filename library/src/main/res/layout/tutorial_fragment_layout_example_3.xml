@@ -3,7 +3,7 @@
              android:id="@+id/intro_background"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#03A9F4">
+             android:background="#FF0000">
 
     <FrameLayout
         android:layout_width="match_parent"

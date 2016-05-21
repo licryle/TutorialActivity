@@ -30,9 +30,12 @@ dependencies {
 public class IntroActivity extends TutorialActivity {
   @Override
   protected void _createFragments() {
-    _addFragment(TutorialFragment.newInstance(Color.parseColor("#03A9F4")));
-    _addFragment(TutorialFragment.newInstance(Color.parseColor("#4CAF50")));
-    _addFragment(TutorialFragment.newInstance(Color.parseColor("#FF0000")));
+    _addFragment(TutorialFragment.newInstance(
+        R.layout.tutorial_fragment_layout_example));
+    _addFragment(TutorialFragment.newInstance(
+        R.layout.tutorial_fragment_layout_example_2));
+    _addFragment(TutorialFragment.newInstance(
+        R.layout.tutorial_fragment_layout_example_3));
   }
 
   @Override

@@ -1,22 +1,26 @@
 package com.licryle.tutorialactivity;
 
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.licryle.IntroActivity.R;
-
 public class TutorialFragment extends Fragment {
-  protected static final String BACKGROUND_COLOR = "backgroundColor";
-  protected int _mBackgroundColor;
+  protected static final String LAYOUT_RESOURCE = "layout_resource";
+  protected int _iLayoutResId;
+  protected int _iBackgroundColor;
 
-  public static TutorialFragment newInstance(int iBackgroundColor) {
+  protected View _mView = null;
+
+  public static TutorialFragment newInstance(int iLayoutResId) {
     TutorialFragment mFragment = new TutorialFragment();
 
     Bundle mBundle = new Bundle();
-    mBundle.putInt(BACKGROUND_COLOR, iBackgroundColor);
+    mBundle.putInt(LAYOUT_RESOURCE, iLayoutResId);
     mFragment.setArguments(mBundle);
 
     return mFragment;
@@ -26,21 +30,37 @@ public class TutorialFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    if (!getArguments().containsKey(BACKGROUND_COLOR))
-      throw new RuntimeException("Fragment must contain a \"" + BACKGROUND_COLOR + "\" argument!");
-    _mBackgroundColor = getArguments().getInt(BACKGROUND_COLOR);
+    if (!getArguments().containsKey(LAYOUT_RESOURCE))
+      throw new RuntimeException("TutorialFragment must contain a \"" +
+          LAYOUT_RESOURCE + "\" argument!");
+
+    _iLayoutResId = getArguments().getInt(LAYOUT_RESOURCE);
+
+    try {
+      getActivity().getResources().getLayout(_iLayoutResId);
+    } catch (Resources.NotFoundException mException) {
+      throw new RuntimeException("TutorialFragment must be provided a valid" +
+          " Layout Resource. This one couldn't be found.");
+    }
   }
 
-  public int getBackgroundColor() { return _mBackgroundColor; }
+  public int getBackgroundColor() {
+    return _iBackgroundColor;
+  }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
     int layoutResId = _getLayoutResourceId();
 
     // Inflate the layout resource file
-    View view = getActivity().getLayoutInflater().inflate(layoutResId, container, false);
+    _mView = getActivity().getLayoutInflater().inflate(layoutResId,
+        container, false);
 
-    return view;
+    _iBackgroundColor = ((ColorDrawable) _mView.getBackground()).getColor();
+    _mView.setBackgroundColor(Color.TRANSPARENT);
+
+    return _mView;
   }
 
   @Override
@@ -53,6 +73,6 @@ public class TutorialFragment extends Fragment {
   }
 
   protected int _getLayoutResourceId() {
-    return R.layout.tutorial_fragment_layout_example;
+    return _iLayoutResId;
   }
 }
