@@ -54,9 +54,7 @@ abstract public class TutorialActivity extends AppCompatActivity {
   }
 
   protected TutorialPagination _createPagination() {
-    TutorialPagination mPagination = new TutorialPagination(this);
-
-    return mPagination;
+    return new TutorialPagination(this);
   }
 
   abstract protected void _createFragments();

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,12 +52,22 @@ public class TutorialPagination {
 
   protected void _setSelectedPage(int iPage) {
     for(int i = 0; i < _aPages.size(); i++) {
+      ImageView mView = (ImageView) _aPages.get(i);
+
+      ViewGroup.LayoutParams mParams = mView.getLayoutParams();
+
       if (i == iPage) {
-        _aPages.get(i).setColorFilter(_getSelectedIconColor());
+        mView.setColorFilter(_getSelectedIconColor());
+        mParams.height = _getSelectedIconSize();
+        mParams.width = _getSelectedIconSize();
         _iSelectedItem = iPage;
       } else {
-        _aPages.get(i).setColorFilter(_getUnSelectedIconColor());
+        mView.setColorFilter(_getUnSelectedIconColor());
+        mParams.height = _getUnSelectedIconSize();
+        mParams.width = _getUnSelectedIconSize();
       }
+
+      mView.setLayoutParams(mParams);
     }
   }
 
@@ -135,7 +146,8 @@ public class TutorialPagination {
     return new Integer[]{25, 25, 25, 100};
   }
 
-  protected int _getPageIconSize() {
-    return 25;
+  protected int _getSelectedIconSize() { return 40; }
+  protected int _getUnSelectedIconSize() {
+    return 30;
   }
 }
