@@ -3,6 +3,7 @@ package com.licryle.tutorialactivity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.licryle.IntroActivity.R;
@@ -58,4 +59,8 @@ abstract public class TutorialActivity extends AppCompatActivity {
   }
 
   abstract protected void _createFragments();
+
+  public void finishActivity(View view) {
+    finish();
+  }
 }

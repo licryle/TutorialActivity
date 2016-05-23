@@ -43,6 +43,13 @@
             android:layout_marginBottom="200dp"
             android:textSize="20sp"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finish activity"
+            android:onClick="finishActivity"
+            android:layout_gravity="bottom|end|right"/>
+
     </FrameLayout>
 
 </FrameLayout>
